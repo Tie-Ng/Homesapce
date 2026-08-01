@@ -1,0 +1,691 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homespace Admin | Ban Giám Hiệu Nhà Trường</title>
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Light Styling tailored for Admin Dashboard -->
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Admin specific overrides */
+    .admin-body {
+      background-color: #f1f5f9;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+    }
+    
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .admin-title-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .admin-logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.5rem;
+    }
+
+    .admin-header h1 {
+      font-size: 1.75rem;
+      color: var(--text-bright);
+    }
+
+    .admin-header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .stat-icon.sos { background: linear-gradient(135deg, #e11d48, #be123c); }
+    .stat-icon.pending { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .stat-icon.resolved { background: linear-gradient(135deg, #10b981, #059669); }
+    .stat-icon.posts { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+
+    .stat-info h3 {
+      font-size: 1.8rem;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Admin Content Layout */
+    .admin-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .dashboard-panel {
+      padding: 2rem;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .panel-header h2 {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-header h2 i {
+      color: var(--color-primary);
+    }
+
+    .panel-header h2.sos-title i {
+      color: var(--color-accent);
+    }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background: var(--bg-secondary);
+      color: var(--text-main);
+      font-weight: 600;
+      font-family: var(--font-header);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(99, 102, 241, 0.02);
+    }
+
+    /* Status Badges */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .badge.pending {
+      background: rgba(245, 158, 11, 0.12);
+      color: #d97706;
+    }
+
+    .badge.processing {
+      background: rgba(99, 102, 241, 0.12);
+      color: #4f46e5;
+    }
+
+    .badge.resolved {
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+    }
+
+    /* Action buttons in lists */
+    .action-btn-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      color: var(--text-main);
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition-smooth);
+    }
+
+    .action-btn:hover {
+      background: var(--bg-secondary);
+    }
+
+    .action-btn.process-btn {
+      border-color: rgba(99, 102, 241, 0.3);
+      color: var(--color-secondary);
+    }
+    .action-btn.process-btn:hover {
+      background: var(--color-secondary);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .action-btn.resolve-btn {
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #059669;
+    }
+    .action-btn.resolve-btn:hover {
+      background: #059669;
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .action-btn.delete-btn {
+      border-color: rgba(225, 29, 72, 0.3);
+      color: var(--color-accent);
+    }
+    .action-btn.delete-btn:hover {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    /* Password Modal Overlay */
+    .pwd-overlay {
+      position: fixed;
+      inset: 0;
+      background: #0f172a;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .pwd-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .pwd-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-secondary);
+      font-size: 1.75rem;
+      margin: 0 auto 1.5rem;
+    }
+
+    .pwd-input {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 1.25rem;
+      text-align: center;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .pwd-error {
+      color: var(--color-accent);
+      font-size: 0.85rem;
+      margin-top: -0.75rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    /* Auto poll indicator */
+    .poll-indicator {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .poll-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulse-green 1.5s infinite;
+    }
+
+    @keyframes pulse-green {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Password Entry Shield -->
+  <div class="pwd-overlay" id="pwd-overlay">
+    <div class="pwd-box">
+      <div class="pwd-icon">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h2 style="font-family: var(--font-header); margin-bottom: 0.5rem;">Cổng Ban Giám Hiệu</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Vui lòng nhập mật khẩu quản trị để truy cập dữ liệu.</p>
+      
+      <input type="password" id="admin-pwd-field" class="pwd-input" placeholder="••••••••" autofocus>
+      <div class="pwd-error" id="pwd-error-msg">Mật khẩu không đúng! Vui lòng thử lại.</div>
+      
+      <button id="btn-pwd-submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+        <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
+      </button>
+    </div>
+  </div>
+
+  <!-- Dashboard Container -->
+  <div class="admin-container" id="admin-dashboard-view" style="display: none;">
+    
+    <!-- Top Header -->
+    <div class="admin-header">
+      <div class="admin-title-area">
+        <div class="admin-logo-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <h1>Homespace Admin Panel</h1>
+          <p>Cổng điều phối SOS và giám sát nội dung nhà trường</p>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <div class="poll-indicator">
+          <div class="poll-dot"></div>
+          <span>Tự cập nhật (5s)</span>
+        </div>
+        <a href="index.html" class="btn btn-secondary" style="padding: 0.6rem 1.2rem;">
+          <i class="fa-solid fa-house"></i> Về Trang chủ
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats Cards Grid -->
+    <div class="stats-grid">
+      <div class="stat-card glass-panel">
+        <div class="stat-icon sos">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="stat-total-sos">0</h3>
+          <p>Tổng SOS Nhận Được</p>
+        </div>
+      </div>
+
+      <div class="stat-card glass-panel">
+        <div class="stat-icon pending">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="stat-pending-sos">0</h3>
+          <p>SOS Chờ Xử Lý</p>
+        </div>
+      </div>
+
+      <div class="stat-card glass-panel">
+        <div class="stat-icon resolved">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="stat-resolved-sos">0</h3>
+          <p>SOS Đã Xử Lý Xong</p>
+        </div>
+      </div>
+
+      <div class="stat-card glass-panel">
+        <div class="stat-icon posts">
+          <i class="fa-solid fa-user-secret"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="stat-total-posts">0</h3>
+          <p>Bài đăng ẩn danh</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Lists Layout -->
+    <div class="admin-layout">
+      
+      <!-- SOS Alerts Panel -->
+      <div class="dashboard-panel glass-panel">
+        <div class="panel-header">
+          <h2 class="sos-title"><i class="fa-solid fa-triangle-exclamation"></i> Yêu cầu SOS Khẩn Cấp (Nhà Trường Phản Hồi)</h2>
+          <button class="btn btn-secondary" onclick="loadSOSData()" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+            <i class="fa-solid fa-rotate"></i> Làm mới nhanh
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 15%;">Thời gian</th>
+                <th style="width: 20%;">Loại sự cố</th>
+                <th style="width: 15%;">Vị trí</th>
+                <th>Mô tả chi tiết</th>
+                <th style="width: 12%;">Trạng thái</th>
+                <th style="width: 22%; text-align: center;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="sos-table-body">
+              <!-- Inserted dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Anonymous posts Panel -->
+      <div class="dashboard-panel glass-panel">
+        <div class="panel-header">
+          <h2><i class="fa-solid fa-newspaper"></i> Quản lý Bài đăng Tâm sự ẩn danh (Kiểm duyệt nội dung)</h2>
+          <button class="btn btn-secondary" onclick="loadPostsData()" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+            <i class="fa-solid fa-rotate"></i> Làm mới nhanh
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 12%;">Thời gian</th>
+                <th style="width: 15%;">Người dùng</th>
+                <th style="width: 15%;">Phân loại</th>
+                <th>Nội dung bài đăng</th>
+                <th style="width: 10%;">Lượt đồng cảm</th>
+                <th style="width: 15%; text-align: center;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="posts-table-body">
+              <!-- Inserted dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Admin JS Business Logic - Firebase Firestore Real-time -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      query,
+      orderBy,
+      onSnapshot,
+      doc,
+      updateDoc,
+      deleteDoc,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyATUmZjLZfWEONuvE8ln8a8FRnhD1QDkZk",
+      authDomain: "antibully-c359a.firebaseapp.com",
+      projectId: "antibully-c359a",
+      storageBucket: "antibully-c359a.firebasestorage.app",
+      messagingSenderId: "890584779937",
+      appId: "1:890584779937:web:634560b105a048cab374e0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const DEFAULT_PWD = 'admin123';
+    const pwdOverlay = document.getElementById('pwd-overlay');
+    const pwdField = document.getElementById('admin-pwd-field');
+    const pwdSubmit = document.getElementById('btn-pwd-submit');
+    const pwdError = document.getElementById('pwd-error-msg');
+    const dashboardView = document.getElementById('admin-dashboard-view');
+
+    let unsubSOS = null, unsubPosts = null, unsubBookings = null;
+
+    function handleLogin() {
+      if (pwdField.value === DEFAULT_PWD) {
+        pwdOverlay.style.display = 'none';
+        dashboardView.style.display = 'block';
+        startRealtimeListeners();
+      } else {
+        pwdError.style.display = 'block';
+        pwdField.value = '';
+        pwdField.focus();
+      }
+    }
+
+    pwdSubmit.addEventListener('click', handleLogin);
+    pwdField.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+
+    function startRealtimeListeners() {
+      // --- SOS Real-time ---
+      const sosQuery = query(collection(db, 'sos'), orderBy('timestamp', 'desc'));
+      unsubSOS = onSnapshot(sosQuery, snapshot => {
+        const sosList = [];
+        snapshot.forEach(d => sosList.push({ id: d.id, ...d.data() }));
+
+        document.getElementById('stat-total-sos').textContent = sosList.length;
+        document.getElementById('stat-pending-sos').textContent = sosList.filter(s => s.status === 'Chờ xử lý').length;
+        document.getElementById('stat-resolved-sos').textContent = sosList.filter(s => s.status === 'Đã xử lý').length;
+
+        const tbody = document.getElementById('sos-table-body');
+        if (sosList.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">Chưa nhận được tín hiệu SOS nào.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = sosList.map(sos => {
+          const time = new Date(sos.timestamp).toLocaleString('vi-VN', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit' });
+          let badgeClass = 'pending';
+          if (sos.status === 'Đang xử lý') badgeClass = 'processing';
+          if (sos.status === 'Đã xử lý') badgeClass = 'resolved';
+          let buttons = '';
+          if (sos.status === 'Chờ xử lý') buttons += `<button class="action-btn process-btn" data-id="${sos.id}" data-action="process"><i class="fa-solid fa-spinner"></i> Xử lý</button>`;
+          if (sos.status !== 'Đã xử lý') buttons += `<button class="action-btn resolve-btn" data-id="${sos.id}" data-action="resolve"><i class="fa-solid fa-check"></i> Xong</button>`;
+          buttons += `<button class="action-btn delete-btn" data-id="${sos.id}" data-action="delete-sos"><i class="fa-solid fa-trash"></i> Xóa</button>`;
+          return `<tr>
+            <td>${time}</td>
+            <td style="font-weight:600;color:var(--color-accent);">${escapeHTML(sos.type)}</td>
+            <td style="font-weight:500;">${escapeHTML(sos.location || '—')}</td>
+            <td>${escapeHTML(sos.note || 'Không có ghi chú.')}<br><small style="color:var(--text-muted);">Email: ${escapeHTML(sos.userEmail || 'Ẩn danh')}</small></td>
+            <td><span class="badge ${badgeClass}">${sos.status}</span></td>
+            <td><div class="action-btn-group" style="justify-content:center;">${buttons}</div></td>
+          </tr>`;
+        }).join('');
+
+        // Attach action handlers
+        tbody.querySelectorAll('[data-action]').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const id = btn.dataset.id;
+            const action = btn.dataset.action;
+            const ref = doc(db, 'sos', id);
+            if (action === 'process') await updateDoc(ref, { status: 'Đang xử lý' });
+            else if (action === 'resolve') await updateDoc(ref, { status: 'Đã xử lý' });
+            else if (action === 'delete-sos') {
+              if (confirm('Xóa báo cáo SOS này?')) await deleteDoc(ref);
+            }
+          });
+        });
+      });
+
+      // --- Anonymous Posts Real-time ---
+      const postsQuery = query(collection(db, 'posts'), orderBy('timestamp', 'desc'));
+      unsubPosts = onSnapshot(postsQuery, snapshot => {
+        const postsList = [];
+        snapshot.forEach(d => postsList.push({ id: d.id, ...d.data() }));
+
+        document.getElementById('stat-total-posts').textContent = postsList.length;
+        const tbody = document.getElementById('posts-table-body');
+
+        if (postsList.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">Chưa có bài tâm sự ẩn danh nào.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = postsList.map(post => {
+          const time = new Date(post.timestamp).toLocaleString('vi-VN', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit' });
+          const status = post.status || 'approved';
+          const statusLabel = status === 'pending' ? 'Chờ duyệt' : 'Đã duyệt';
+          const statusClass = status === 'pending' ? 'pending' : 'resolved';
+          const userName = post.userName || 'Ẩn danh';
+          const actionButtons = [];
+          if (status === 'pending') {
+            actionButtons.push(`<button class="action-btn process-btn" data-id="${post.id}" data-action="approve-post"><i class="fa-solid fa-check"></i> Duyệt</button>`);
+          }
+          actionButtons.push(`<button class="action-btn delete-btn" data-id="${post.id}" data-action="delete-post"><i class="fa-solid fa-trash"></i> Xóa</button>`);
+
+          return `<tr>
+            <td>${time}</td>
+            <td style="font-weight:600;color:var(--color-primary);"><small>${escapeHTML(userName)}</small></td>
+            <td style="font-weight:600;color:var(--color-secondary);">${escapeHTML(post.category)}</td>
+            <td style="max-width:350px;white-space:pre-wrap;word-break:break-word;">${escapeHTML(post.content)}</td>
+            <td>💛 ${post.hearts || 0}</td>
+            <td><div class="action-btn-group" style="justify-content:center;"><span class="badge ${statusClass}" style="margin-right:0.5rem;">${statusLabel}</span>${actionButtons.join('')}</div></td>
+          </tr>`;
+        }).join('');
+
+        tbody.querySelectorAll('[data-action]').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const id = btn.dataset.id;
+            const action = btn.dataset.action;
+            const ref = doc(db, 'posts', id);
+            if (action === 'approve-post') {
+              await updateDoc(ref, { status: 'approved', approvedAt: new Date().toISOString() });
+            } else if (action === 'delete-post') {
+              if (confirm('Xóa bài tâm sự ẩn danh này?')) await deleteDoc(ref);
+            }
+          });
+        });
+      });
+
+      // --- Bookings Real-time ---
+      const bookingsQuery = query(collection(db, 'bookings'), orderBy('timestamp', 'desc'));
+      unsubBookings = onSnapshot(bookingsQuery, snapshot => {
+        const list = [];
+        snapshot.forEach(d => list.push({ id: d.id, ...d.data() }));
+
+        const tbody = document.getElementById('bookings-table-body');
+        if (!tbody) return;
+
+        if (list.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">Chưa có yêu cầu đặt lịch nào.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = list.map(bk => {
+          const time = new Date(bk.timestamp).toLocaleString('vi-VN', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit' });
+          const statusClass = bk.status === 'Đã xác nhận' ? 'resolved' : 'pending';
+          let actionBtn = '';
+          if (bk.status !== 'Đã xác nhận') {
+            actionBtn = `<button class="action-btn resolve-btn" data-id="${bk.id}" data-action="confirm-booking"><i class="fa-solid fa-check"></i> Xác nhận</button>`;
+          }
+          actionBtn += `<button class="action-btn delete-btn" data-id="${bk.id}" data-action="delete-booking"><i class="fa-solid fa-trash"></i> Xóa</button>`;
+          return `<tr>
+            <td>${time}</td>
+            <td>${escapeHTML(bk.userEmail || '—')}</td>
+            <td style="font-weight:600;">${escapeHTML(bk.expertName)}</td>
+            <td>${bk.date} — ${bk.time}</td>
+            <td><span class="badge ${statusClass}">${bk.status}</span></td>
+            <td><div class="action-btn-group" style="justify-content:center;">${actionBtn}</div></td>
+          </tr>`;
+        }).join('');
+
+        tbody.querySelectorAll('[data-action]').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const id = btn.dataset.id;
+            const action = btn.dataset.action;
+            if (action === 'confirm-booking') await updateDoc(doc(db, 'bookings', id), { status: 'Đã xác nhận' });
+            else if (action === 'delete-booking') {
+              if (confirm('Xóa yêu cầu đặt lịch này?')) await deleteDoc(doc(db, 'bookings', id));
+            }
+          });
+        });
+      });
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>'"]/g, tag => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[tag] || tag));
+    }
+  </script>
+</body>
+</html>

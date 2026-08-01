@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <title>Homespace</title>
+  <meta name="description"
+    content="SafeSpace là nền tảng cao cấp cung cấp các công cụ và tài nguyên để phòng chống bạo lực học đường. Truy cập các hướng dẫn tình huống tương tác theo vai trò, hộp công cụ tĩnh tâm và tạo nhật ký sự cố bạo lực.">
+  <meta name="keywords"
+    content="chống bạo lực học đường, chống bạo lực mạng, hỗ trợ bạo lực học đường, công cụ giải tỏa tâm lý, báo cáo bạo lực học đường, đường dây nóng hỗ trợ">
+  <meta name="author" content="SafeSpace Initiative">
+
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header id="header">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Homespace</span>
+      </a>
+
+      <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#home" class="nav-link active" id="nav-home">Trang chủ</a>
+
+        <div class="nav-item dropdown" id="dropdown-guides">
+          <a href="javascript:void(0)" class="nav-link dropdown-toggle" id="nav-guides-toggle">
+            Cẩm nang <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#scenarios" class="nav-link dropdown-item" id="nav-scenarios">
+              <i class="fa-solid fa-compass"></i>
+              <div>
+                <span>Cẩm nang Tình huống</span>
+                <small>Hướng dẫn xử lý theo vai trò</small>
+              </div>
+            </a>
+            <a href="#education" class="nav-link dropdown-item" id="nav-education">
+              <i class="fa-solid fa-school"></i>
+              <div>
+                <span>Kiến thức & Thông tin</span>
+                <small>Nhận biết và phòng ngừa bạo lực</small>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown" id="dropdown-tools">
+          <a href="javascript:void(0)" class="nav-link dropdown-toggle" id="nav-tools-toggle">
+            Công cụ <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-large">
+            <a href="#toolbox" class="nav-link dropdown-item" id="nav-toolbox">
+              <i class="fa-solid fa-heart"></i>
+              <div>
+                <span>Góc Tĩnh tâm</span>
+                <small>Bài tập thở & thông điệp tích cực</small>
+              </div>
+            </a>
+            <a href="#log-creator" class="nav-link dropdown-item" id="nav-log-creator">
+              <i class="fa-solid fa-file-shield"></i>
+              <div>
+                <span>Nhật ký Sự cố</span>
+                <small>Ghi chép minh chứng bảo mật</small>
+              </div>
+            </a>
+            <a href="#anonymous-board" class="nav-link dropdown-item" id="nav-anon-board">
+              <i class="fa-solid fa-rss"></i>
+              <div>
+                <span>Bảng tâm sự</span>
+                <small>Trải lòng ẩn danh an toàn</small>
+              </div>
+            </a>
+            <a href="#chat-section" class="nav-link dropdown-item" id="nav-chat">
+              <i class="fa-solid fa-comments"></i>
+              <div>
+                <span>Hộp Chat kết nối</span>
+                <small>Học sinh & Phụ huynh trò chuyện</small>
+              </div>
+            </a>
+            <a href="#booking-section" class="nav-link dropdown-item" id="nav-booking">
+              <i class="fa-solid fa-calendar-days"></i>
+              <div>
+                <span>Đặt lịch Chuyên gia</span>
+                <small>Tư vấn tâm lý chuyên sâu</small>
+              </div>
+            </a>
+            <a href="#ai-chatbot-section" class="nav-link dropdown-item" id="nav-ai-chat">
+              <i class="fa-solid fa-robot"></i>
+              <div>
+                <span>Trợ lý Tư vấn AI</span>
+                <small>Trò chuyện riêng tư 24/7</small>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="#resources" class="nav-link" id="nav-resources">Đường dây nóng</a>
+        <a href="admin.html" class="nav-admin-link" target="_blank"><i class="fa-solid fa-lock"></i> Admin</a>
+        
+        <div id="auth-status-container" style="display: flex; align-items: center; gap: 0.5rem; margin-left: 0.25rem;">
+          <button class="btn-login-nav" id="btn-show-auth-modal">Đăng nhập</button>
+        </div>
+        <a href="#resources" class="btn-hotline-nav" id="btn-hotline-nav">
+          <i class="fa-solid fa-phone-flip"></i> Nhận Trợ giúp Ngay
+        </a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="section-tag">Bạn Không Cô Đơn</span>
+        <h1>Chung tay chống <span>Bạo lực học đường</span>.</h1>
+        <p>SafeSpace là bến đỗ an toàn của bạn. Dù bạn đang phải đối mặt với sự quấy rối trên mạng, chứng kiến sự tẩy
+          chay hay tìm kiếm tài nguyên để hỗ trợ người bạn yêu thương—chúng tôi luôn sẵn sàng cung cấp các công cụ giải
+          tỏa tâm lý tích cực, hướng dẫn và trợ giúp tức thì.</p>
+        <div class="hero-cta">
+          <a href="#scenarios" class="btn btn-primary" id="hero-btn-primary">
+            <i class="fa-solid fa-compass"></i> Khám phá Hướng dẫn
+          </a>
+          <a href="#toolbox" class="btn btn-secondary" id="hero-btn-secondary">
+            <i class="fa-solid fa-heart"></i> Công cụ Tĩnh tâm
+          </a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <img src="assets/hero.png" alt="SafeSpace supportive community illustration" class="hero-img" id="hero-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenario Guide Section -->
+  <section id="scenarios">
+    <div class="section-header">
+      <span class="section-tag">Hỗ trợ thiết thực</span>
+      <h2 class="section-title">Vai trò của bạn là gì?</h2>
+      <p class="section-subtitle">Hãy chọn vai trò của bạn để nhận được hướng dẫn chi tiết, từng bước cách xử lý các
+        tình huống bạo lực một cách an toàn và mang tính xây dựng.</p>
+    </div>
+
+    <!-- Interactive Scenario Tabs -->
+    <div class="scenario-selector">
+      <button class="scenario-tab active" data-role="victim" id="tab-victim">
+        <i class="fa-solid fa-user-shield"></i> Tôi đang bị bắt nạt
+      </button>
+      <button class="scenario-tab" data-role="bystander" id="tab-bystander">
+        <i class="fa-solid fa-eye"></i> Tôi chứng kiến bắt nạt
+      </button>
+      <button class="scenario-tab" data-role="parent" id="tab-parent">
+        <i class="fa-solid fa-users"></i> Tôi là Phụ huynh / Người giám hộ
+      </button>
+      <button class="scenario-tab" data-role="educator" id="tab-educator">
+        <i class="fa-solid fa-school"></i> Tôi là Nhà giáo dục
+      </button>
+    </div>
+
+    <!-- Active Scenario Content Displays -->
+    <div class="scenario-display glass-panel" id="scenario-display">
+      <div class="scenario-content">
+        <h3 id="scenario-title"><i class="fa-solid fa-user-shield"></i> Hành động dành cho Nạn nhân</h3>
+        <p id="scenario-desc">Đây không phải là lỗi của bạn, và bạn không việc gì phải chịu đựng điều này một mình. Dưới
+          đây là các bước tức thời bạn nên thực hiện để bảo vệ bản thân và tìm kiếm hướng giải quyết.</p>
+
+        <div class="scenario-grid">
+          <div class="action-card glass-panel do" style="background: rgba(20, 184, 166, 0.05);">
+            <h4><i class="fa-solid fa-circle-check"></i> Nên Làm</h4>
+            <p id="scenario-do">Liên hệ ngay với người lớn đáng tin cậy, thành viên gia đình hoặc chuyên gia tư vấn. Ghi
+              lại tất cả các sự cố (chụp ảnh màn hình, lưu ngày tháng). Đặt giới hạn và báo cáo tài khoản vi phạm trên
+              mạng xã hội.</p>
+          </div>
+          <div class="action-card glass-panel dont" style="background: rgba(244, 63, 94, 0.05);">
+            <h4><i class="fa-solid fa-circle-xmark"></i> Tránh Làm</h4>
+            <p id="scenario-dont">Không trả đũa hoặc phản hồi kẻ bắt nạt, vì điều này có thể làm tình hình tồi tệ hơn.
+              Không giữ bí mật việc bị bắt nạt hoặc tự đổ lỗi cho bản thân về hành vi của họ.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Safe Quote panel -->
+      <div class="action-card glass-panel"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+        <span class="section-tag" id="scenario-tip-tag">Mẹo nhỏ</span>
+        <h4 style="font-size: 1.3rem; margin-bottom: 1rem;" id="scenario-tip-title">Lưu lại Minh chứng</h4>
+        <p style="font-size: 0.95rem; margin-bottom: 1.5rem;" id="scenario-tip-desc">Ảnh chụp màn hình và lịch sử tin
+          nhắn là cực kỳ quan trọng. Nếu bạn gặp phải bạo lực mạng, hãy chụp lại liên kết (URL), ngày giờ, tên người
+          dùng và nội dung ngay lập tức trước khi chúng có thể bị xóa.</p>
+        <a href="#log-creator" class="btn btn-primary" style="align-self: flex-start;" id="btn-scenario-action">
+          <i class="fa-solid fa-pen-to-square"></i> Dùng Trình tạo Nhật ký
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coping Toolbox Section -->
+  <section id="toolbox">
+    <div class="section-header">
+      <span class="section-tag">Góc Tĩnh tâm</span>
+      <h2 class="section-title">Thư giãn & Kiên cường</h2>
+      <p class="section-subtitle">Hãy dành một phút để thư giãn. Sử dụng các công cụ tương tác của chúng tôi để kiểm
+        soát lo âu, xây dựng sự tập trung tích cực hoặc ghi chép sự việc.</p>
+    </div>
+
+    <div class="toolbox-grid">
+      <!-- Deep Breathing Tool -->
+      <div class="tool-left glass-panel">
+        <span class="section-tag">Bài tập Thư giãn</span>
+        <h3 style="margin-bottom: 1.5rem;">Hơi thở Tĩnh tâm</h3>
+
+        <div class="breathing-circle-outer">
+          <div class="breathing-circle-inner" id="breathing-circle">
+            <span class="breathing-text" id="breathing-text">Thở</span>
+          </div>
+        </div>
+
+        <p class="breathing-instruction" id="breathing-instruction">Hãy chú ý theo vòng tròn. Hít vào thật sâu và chậm
+          rãi.</p>
+        <button class="btn btn-primary" id="btn-breathing-control">
+          <i class="fa-solid fa-play"></i> Bắt đầu Tập
+        </button>
+      </div>
+
+      <!-- Affirmations & Log Launcher -->
+      <div class="tool-right">
+        <div class="affirmation-box glass-panel">
+          <i class="fa-solid fa-quote-left quote-icon"></i>
+          <p class="affirmation-text" id="affirmation-text">"Bạn dũng cảm hơn bạn tưởng tin, mạnh mẽ hơn bạn thể hiện,
+            và thông minh hơn bạn nghĩ."</p>
+          <button class="btn btn-secondary" id="btn-next-affirmation"
+            style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">
+            <i class="fa-solid fa-rotate"></i> Thông điệp Tiếp theo
+          </button>
+        </div>
+
+        <div class="log-helper-box glass-panel">
+          <div class="log-helper-header">
+            <h3><i class="fa-solid fa-file-shield"></i> Ghi chép Minh chứng Bạo lực</h3>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Nếu bạn đang chuẩn bị trao đổi với phụ huynh, ban giám
+              hiệu trường học hoặc dịch vụ hỗ trợ, việc ghi lại chính xác thời gian và mô tả chi tiết sẽ giúp tiếng nói
+              của bạn được lắng nghe rõ ràng hơn.</p>
+          </div>
+          <a href="#log-creator" class="btn btn-secondary" style="margin-top: 1.5rem; align-self: flex-start;"
+            id="btn-scroll-log">
+            <i class="fa-solid fa-list-check"></i> Mở Biểu mẫu Nhật ký
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bullying Education Portal -->
+  <section id="education">
+    <div class="section-header">
+      <span class="section-tag">Kiến thức & Thông tin</span>
+      <h2 class="section-title">Hiểu về Bắt nạt & Bạo lực</h2>
+      <p class="section-subtitle">Giáo dục là lá chắn đầu tiên. Hãy tìm hiểu cách nhận biết các hình thức bắt nạt khác
+        nhau và tác động của chúng đối với sức khỏe tinh thần.</p>
+    </div>
+
+    <div class="education-grid">
+      <div class="edu-card glass-panel">
+        <div class="edu-icon"><i class="fa-solid fa-laptop"></i></div>
+        <h3>Bắt nạt trên mạng</h3>
+        <p>Quấy rối kỹ thuật số qua mạng xã hội, tin nhắn hoặc phòng chơi game. Bao gồm phát tán tin đồn, chia sẻ thông
+          tin riêng tư hoặc cố ý nhắm mục tiêu thù hận.</p>
+        <ul class="edu-signs">
+          <li><i class="fa-solid fa-circle"></i> Giấu màn hình / tắt thiết bị đột ngột</li>
+          <li><i class="fa-solid fa-circle"></i> Cảm xúc bất ổn sau khi truy cập mạng</li>
+          <li><i class="fa-solid fa-circle"></i> Xóa tài khoản đột ngột không rõ lý do</li>
+        </ul>
+      </div>
+
+      <div class="edu-card glass-panel">
+        <div class="edu-icon"><i class="fa-solid fa-comments"></i></div>
+        <h3>Bắt nạt bằng lời nói</h3>
+        <p>Chửi bới, trêu chọc, xúc phạm và chế giễu. Dù không để lại vết thương thể xác, bạo lực ngôn từ gây ra tổn
+          thương tâm lý lâu dài cho lòng tự trọng.</p>
+        <ul class="edu-signs">
+          <li><i class="fa-solid fa-circle"></i> Thu mình hoặc tự cô lập xã hội</li>
+          <li><i class="fa-solid fa-circle"></i> Tự ti đột ngột, mất tự tin</li>
+          <li><i class="fa-solid fa-circle"></i> Thường tự hạ thấp bản thân</li>
+        </ul>
+      </div>
+
+      <div class="edu-card glass-panel">
+        <div class="edu-icon"><i class="fa-solid fa-hand-fist"></i></div>
+        <h3>Bắt nạt thể xác</h3>
+        <p>Hành vi hung hãn bao gồm đánh, đẩy, vấp ngã hoặc phá hoại tài sản cá nhân. Đòi hỏi phải can thiệp ngay lập
+          tức để ngăn ngừa thương tích thể chất.</p>
+        <ul class="edu-signs">
+          <li><i class="fa-solid fa-circle"></i> Vết cắt, bầm tím không rõ nguyên nhân</li>
+          <li><i class="fa-solid fa-circle"></i> Đồ dùng cá nhân bị hỏng hoặc mất tích</li>
+          <li><i class="fa-solid fa-circle"></i> Thường xuyên kêu đau nhức cơ thể</li>
+        </ul>
+      </div>
+
+      <div class="edu-card glass-panel">
+        <div class="edu-icon"><i class="fa-solid fa-network-wired"></i></div>
+        <h3>Tẩy chay xã hội</h3>
+        <p>Hình thức cô lập các mối quan hệ thông qua việc lan truyền tin đồn, dàn xếp tẩy chay hoặc thao túng bạn bè để
+          hủy hoại vị thế xã hội.</p>
+        <ul class="edu-signs">
+          <li><i class="fa-solid fa-circle"></i> Thay đổi nhóm bạn chơi đột ngột</li>
+          <li><i class="fa-solid fa-circle"></i> Sợ hãi đi học hoặc tham gia hoạt động</li>
+          <li><i class="fa-solid fa-circle"></i> Cô độc hoàn toàn trong giờ nghỉ giải lao</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Incident Log Creator Section -->
+  <section id="log-creator">
+    <div class="section-header">
+      <span class="section-tag">Công cụ Thiết thực</span>
+      <h2 class="section-title">Nhật ký Sự cố Bắt nạt</h2>
+      <p class="section-subtitle">Tạo một báo cáo rõ ràng, được đóng dấu thời gian về các sự cố. Công cụ này chạy hoàn
+        toàn trên trình duyệt—dữ liệu của bạn được bảo mật tuyệt đối và không gửi lên máy chủ.</p>
+    </div>
+
+    <div class="log-creator-wrapper glass-panel">
+      <form id="incident-form" onsubmit="return false;">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="log-date">Ngày xảy ra Sự cố</label>
+            <input type="date" id="log-date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="log-type">Hình thức Bắt nạt</label>
+            <select id="log-type" required>
+              <option value="" disabled selected>Chọn danh mục...</option>
+              <option value="Bắt nạt trên mạng">Bắt nạt trên mạng (Cyberbullying)</option>
+              <option value="Bắt nạt bằng lời nói">Bắt nạt bằng lời nói (Verbal)</option>
+              <option value="Bắt nạt thể xác">Bắt nạt thể xác (Physical)</option>
+              <option value="Tẩy chay xã hội">Tẩy chay xã hội (Social Exclusion)</option>
+              <option value="Khác">Khác (Other)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="log-platform">Địa điểm / Nền tảng xảy ra</label>
+            <input type="text" id="log-platform" placeholder="Ví dụ: Sân trường, Instagram, Discord" required>
+          </div>
+
+          <div class="form-group">
+            <label for="log-offender">Những ai liên quan? (Không bắt buộc)</label>
+            <input type="text" id="log-offender" placeholder="Ví dụ: Tên tài khoản cụ thể, bạn học">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="log-desc">Mô tả Chi tiết Sự việc</label>
+            <textarea id="log-desc"
+              placeholder="Cung cấp các chi tiết thực tế. Chuyện gì đã xảy ra? Ai đã nói hoặc làm gì?"
+              required></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Minh chứng đang có (Chọn tất cả những gì áp dụng)</label>
+            <div
+              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-top: 0.5rem;">
+              <label style="font-weight: 400; display: flex; align-items: center; gap: 0.5rem;">
+                <input type="checkbox" id="ev-screenshot" style="width: auto;"> Đã chụp ảnh màn hình
+              </label>
+              <label style="font-weight: 400; display: flex; align-items: center; gap: 0.5rem;">
+                <input type="checkbox" id="ev-links" style="width: auto;"> Đã lưu liên kết/URL trực tiếp
+              </label>
+              <label style="font-weight: 400; display: flex; align-items: center; gap: 0.5rem;">
+                <input type="checkbox" id="ev-witness" style="width: auto;"> Có người chứng kiến
+              </label>
+              <label style="font-weight: 400; display: flex; align-items: center; gap: 0.5rem;">
+                <input type="checkbox" id="ev-reported" style="width: auto;"> Đã báo cáo với nền tảng
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="log-actions">
+          <button type="reset" class="btn btn-secondary" id="btn-log-reset">Xóa Form</button>
+          <button type="button" class="btn btn-primary" id="btn-generate-log">
+            <i class="fa-solid fa-file-invoice"></i> Biên soạn Báo cáo
+          </button>
+        </div>
+      </form>
+
+      <!-- Compiled Preview Block -->
+      <div class="log-preview-container" id="log-preview-container">
+        <h3 style="margin-bottom: 1rem; color: var(--color-primary); font-size: 1.3rem;">
+          <i class="fa-solid fa-eye"></i> Báo cáo Sự cố đã Biên soạn
+        </h3>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-muted);">
+          Kiểm tra lại báo cáo của bạn dưới đây. Bạn có thể sao chép văn bản hoặc tải về dưới dạng tệp văn bản cục bộ để
+          lưu trữ.
+        </p>
+        <div class="log-preview-card" id="log-preview">
+          <!-- Text will be filled in dynamically -->
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+          <button class="btn btn-secondary" id="btn-copy-log">
+            <i class="fa-solid fa-copy"></i> Sao chép vào Bộ nhớ tạm
+          </button>
+          <button class="btn btn-primary" id="btn-download-log">
+            <i class="fa-solid fa-download"></i> Tải Báo cáo về
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Helplines & Resources -->
+  <section id="resources">
+    <div class="section-header">
+      <span class="section-tag">Đường dây nóng & Hỗ trợ</span>
+      <h2 class="section-title">Trò chuyện với Ai đó Ngay</h2>
+      <p class="section-subtitle">Bạn không cô đơn. Dịch vụ hỗ trợ miễn phí, bảo mật luôn sẵn sàng 24/7. Hãy gọi hoặc
+        nhắn tin để nói chuyện với các nhà tư vấn chuyên nghiệp.</p>
+    </div>
+
+    <div class="resources-grid">
+      <!-- Interactive Helpline Map Card -->
+      <div class="glass-panel" style="padding: 2.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--text-bright); margin-bottom: 0.5rem;">
+            <i class="fa-solid fa-map"></i> Đường dây nóng Việt Nam
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Nhấn vào các điểm trên bản đồ hoặc các thẻ dưới để gọi hỗ trợ ngay</p>
+        </div>
+        
+        <!-- Leaflet Map Container -->
+        <div id="vietnam-helpline-map" style="height: 400px; border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border-color);">
+          <!-- Map will be loaded here by JavaScript -->
+        </div>
+
+        <!-- Helpline List Container -->
+        <div class="helplines-list" id="helplines-list-vietnam">
+          <!-- Populated by JS with Vietnam hotlines only -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ANONYMOUS BOARD SECTION
+       ========================================================================== -->
+  <section id="anonymous-board">
+    <div class="section-header">
+      <span class="section-tag">Chia sẻ & Trải lòng</span>
+      <h2 class="section-title">Bảng Chia Sẻ Ẩn Danh</h2>
+      <p class="section-subtitle">Nơi bạn có thể viết lại câu chuyện của mình, giải bày tâm tư hoặc tìm kiếm sự đồng cảm
+        một cách hoàn toàn ẩn danh. Hãy luôn tôn trọng và tử tế với nhau.</p>
+    </div>
+
+    <div class="anon-board-layout">
+      <!-- Create Post Form Panel -->
+      <div class="anon-write-panel glass-panel">
+        <h3><i class="fa-solid fa-pen-nib"></i> Viết bài mới</h3>
+        <p>Câu chuyện của bạn sẽ được bảo mật danh tính hoàn toàn.</p>
+
+        <form id="anon-post-form">
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label for="anon-post-category">Phân loại sự việc:</label>
+            <select id="anon-post-category" required>
+              <option value="Bạo lực học đường">Bạo lực học đường</option>
+              <option value="Bắt nạt mạng">Bắt nạt mạng (Cyberbullying)</option>
+              <option value="Cô lập / Chia rẽ">Cô lập / Chia rẽ</option>
+              <option value="Lời khuyên / Tâm sự">Lời khuyên / Tâm sự</option>
+              <option value="Câu chuyện vượt qua">Câu chuyện vượt qua thành công</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label for="anon-post-content">Nội dung câu chuyện:</label>
+            <textarea id="anon-post-content"
+              placeholder="Chia sẻ trải nghiệm hoặc cảm xúc của bạn tại đây... (Xin vui lòng không nhắc đến tên riêng hay thông tin nhận diện cụ thể của bất kỳ ai)"
+              required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+            <i class="fa-solid fa-paper-plane"></i> Đăng Bài Ẩn Danh
+          </button>
+        </form>
+      </div>
+
+      <!-- Feed Container -->
+      <div>
+        <h3
+          style="font-family: var(--font-header); margin-bottom: 1.25rem; color: var(--text-bright); display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-rss" style="color: var(--color-primary);"></i> Dòng thời gian tâm sự
+        </h3>
+        <div class="anon-feed" id="anon-feed">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CHAT STUDENT & PARENT SECTION
+       ========================================================================== */ -->
+  <section id="chat-section">
+    <div class="section-header">
+      <span class="section-tag">Kết nối Yêu thương</span>
+      <h2 class="section-title">Hộp Chat Giữ Học Sinh & Phụ Huynh</h2>
+      <p class="section-subtitle">Kênh liên lạc nhanh chóng, bí mật và an toàn để chia sẻ những điều khó nói. Hãy chọn
+        đúng vai trò của mình để bắt đầu cuộc hội thoại.</p>
+    </div>
+
+    <div class="chat-layout glass-panel">
+      <!-- Chat Sidebar / Role selection -->
+      <div class="chat-sidebar" style="background: var(--bg-secondary); border-right: 1px solid var(--border-color);">
+        <h3><i class="fa-solid fa-user-shield"></i> Xác nhận Vai trò</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Vui lòng chọn vai trò để bắt đầu cuộc trò chuyện. Tin nhắn sẽ được cập nhật thời gian thực.
+        </p>
+
+        <div class="chat-role-selector">
+          <button class="chat-role-btn" id="role-btn-student" data-role="student">
+            <i class="fa-solid fa-graduation-cap"></i> Tôi là Học sinh
+          </button>
+          <button class="chat-role-btn" id="role-btn-parent" data-role="parent">
+            <i class="fa-solid fa-user-tie"></i> Tôi là Phụ huynh
+          </button>
+          <button class="chat-role-btn" id="role-btn-doctor" data-role="doctor">
+            <i class="fa-solid fa-stethoscope"></i> Tôi là Bác sĩ Tâm lý
+          </button>
+        </div>
+
+        <div class="chat-connect-panel">
+          <label for="chat-connection-code">Mã kết nối</label>
+          <input type="text" id="chat-connection-code" placeholder="Ví dụ: ABC123" maxlength="8">
+          <div class="chat-connect-actions">
+            <button type="button" class="btn btn-primary" id="btn-chat-connect">Kết nối</button>
+            <button type="button" class="btn btn-secondary" id="btn-chat-generate-code">Tạo mã</button>
+          </div>
+          <p class="chat-connect-status" id="chat-connect-status">Chọn vai trò và nhập cùng một mã với người đối thoại để bắt đầu trò chuyện.</p>
+          <div class="chat-room-tabs" id="chat-room-tabs" aria-label="Danh sách phòng chat"></div>
+        </div>
+
+        <div class="chat-info-box">
+          <p><i class="fa-solid fa-circle-info"></i> Tin nhắn được lưu cục bộ trên thiết bị này để đảm bảo tính riêng tư
+            tối đa.</p>
+        </div>
+      </div>
+
+      <!-- Chat Main Area -->
+      <div class="chat-main" id="chat-main-area">
+        <!-- Placeholder before selecting role -->
+        <div class="chat-placeholder" id="chat-no-role-view">
+          <i class="fa-solid fa-comments"></i>
+          <h3>Chọn vai trò để tham gia trò chuyện</h3>
+          <p>Hệ thống sẽ đồng bộ tin nhắn qua bộ nhớ trình duyệt cục bộ.</p>
+        </div>
+
+        <!-- Chat Messaging Panel -->
+        <div style="display: none; flex-direction: column; height: 100%;" id="chat-active-view">
+          <div class="chat-topbar">
+            <div class="chat-topbar-icon" id="chat-partner-icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div style="flex: 1;">
+              <div class="chat-topbar-title" id="chat-partner-name">Người đối thoại</div>
+              <div class="chat-topbar-sub" id="chat-topbar-sub"><i class="fa-solid fa-circle"
+                  style="color: #22c55e; font-size: 0.5rem; margin-right: 0.25rem;"></i> Đang chờ kết nối...</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <button type="button" class="chat-theme-toggle" id="chat-theme-toggle" aria-pressed="false">
+                <i class="fa-solid fa-moon"></i> Chế độ tối
+              </button>
+              <button type="button" class="chat-leave-btn" id="btn-chat-leave-room">
+                <i class="fa-solid fa-right-from-bracket"></i> Rời phòng
+              </button>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chat-messages-container">
+            <!-- Messages populated dynamically -->
+          </div>
+
+          <form class="chat-input-area" id="chat-form">
+            <textarea class="chat-input" id="chat-input-msg" placeholder="Nhập tin nhắn..." rows="1"
+              required></textarea>
+            <button type="submit" class="chat-send-btn" aria-label="Send message">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       EXPERT BOOKING SECTION
+       ========================================================================== -->
+  <section id="booking-section">
+    <div class="section-header">
+      <span class="section-tag">Hỗ trợ chuyên nghiệp</span>
+      <h2 class="section-title">Đặt Lịch Tư Vấn Với Chuyên Gia</h2>
+      <p class="section-subtitle">Kết nối trực tiếp với các chuyên gia tâm lý học đường hàng đầu để nhận được sự đồng
+        cảm và tư vấn chuyên sâu, bảo mật tuyệt đối.</p>
+    </div>
+
+    <div class="booking-intro-card glass-panel">
+      <div class="booking-intro-copy">
+        <span class="section-tag">Đặt lịch nhanh</span>
+        <h3>Hẹn tư vấn 1-1 trong vài phút</h3>
+        <p>Chọn chuyên gia phù hợp, mô tả tình trạng của bạn và giữ lại lịch hẹn an toàn trên tài khoản của mình.</p>
+      </div>
+      <div class="booking-intro-steps">
+        <div class="booking-step"><strong>1</strong><span>Chọn chuyên gia</span></div>
+        <div class="booking-step"><strong>2</strong><span>Đặt ngày & giờ</span></div>
+        <div class="booking-step"><strong>3</strong><span>Nhận phản hồi</span></div>
+      </div>
+    </div>
+
+    <div class="booking-grid">
+      <!-- Expert 1 -->
+      <div class="expert-card glass-panel">
+        <div class="expert-header">
+          <img src="assets/expert1.png" alt="ThS. Tâm lý Nguyễn Thị Mai" class="expert-avatar">
+          <div class="expert-meta">
+            <h3>ThS. Nguyễn Thị Mai</h3>
+            <span class="expert-status" id="status-expert_mai"><i class="fa-solid fa-circle"></i> Đang trực tuyến</span>
+          </div>
+        </div>
+        <p class="expert-bio">Hơn 10 năm kinh nghiệm trong lĩnh vực tư vấn tâm lý học đường, chuyên giải quyết các khủng
+          hoảng tâm lý tuổi vị thành niên và áp lực học tập.</p>
+        <div class="expert-focus">Hỗ trợ học sinh xử lý áp lực học tập, lo âu và các vấn đề tâm lý trong môi trường trường học.</div>
+        <div class="expert-tags">
+          <span class="expert-tag">Bạo lực học đường</span>
+          <span class="expert-tag">Lo âu & Trầm cảm</span>
+          <span class="expert-tag">Tâm lý học đường</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+          <button class="btn btn-primary btn-book-expert" data-expert-id="expert_mai"
+            data-expert-name="ThS. Nguyễn Thị Mai" style="flex: 1; justify-content: center; padding: 0.65rem 0.5rem; font-size: 0.85rem;">
+            <i class="fa-solid fa-calendar-days"></i> Đặt Lịch
+          </button>
+          <button class="btn btn-secondary btn-chat-expert" data-expert-id="expert_mai"
+            data-expert-name="ThS. Nguyễn Thị Mai" style="flex: 1; justify-content: center; padding: 0.65rem 0.5rem; font-size: 0.85rem; background: rgba(99, 102, 241, 0.1); color: var(--color-primary); border: 1px solid rgba(99, 102, 241, 0.2);">
+            <i class="fa-solid fa-comments"></i> Nhắn Tin
+          </button>
+        </div>
+      </div>
+
+      <!-- Expert 2 -->
+      <div class="expert-card glass-panel">
+        <div class="expert-header">
+          <img src="assets/expert2.png" alt="TS. Trần Hoàng Nam" class="expert-avatar">
+          <div class="expert-meta">
+            <h3>TS. Trần Hoàng Nam</h3>
+            <span class="expert-status" id="status-expert_nam"><i class="fa-solid fa-circle"></i> Đang trực tuyến</span>
+          </div>
+        </div>
+        <p class="expert-bio">Chuyên gia hành vi và bạo lực mạng. Tư vấn định hướng, giải quyết các xung đột mối quan
+          hệ, nâng cao năng lực kiên cường cho học sinh.</p>
+        <div class="expert-focus">Phù hợp cho các trường hợp bị bắt nạt mạng, xung đột mối quan hệ hoặc mất tự tin trong giao tiếp.</div>
+        <div class="expert-tags">
+          <span class="expert-tag">Bắt nạt mạng</span>
+          <span class="expert-tag">Xung đột quan hệ</span>
+          <span class="expert-tag">Kỹ năng ứng phó</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+          <button class="btn btn-primary btn-book-expert" data-expert-id="expert_nam"
+            data-expert-name="TS. Trần Hoàng Nam" style="flex: 1; justify-content: center; padding: 0.65rem 0.5rem; font-size: 0.85rem;">
+            <i class="fa-solid fa-calendar-days"></i> Đặt Lịch
+          </button>
+          <button class="btn btn-secondary btn-chat-expert" data-expert-id="expert_nam"
+            data-expert-name="TS. Trần Hoàng Nam" style="flex: 1; justify-content: center; padding: 0.65rem 0.5rem; font-size: 0.85rem; background: rgba(99, 102, 241, 0.1); color: var(--color-primary); border: 1px solid rgba(99, 102, 241, 0.2);">
+            <i class="fa-solid fa-comments"></i> Nhắn Tin
+          </button>
+        </div>
+      </div>
+
+      <!-- Expert 3 -->
+      <div class="expert-card glass-panel">
+        <div class="expert-header">
+          <img src="assets/expert3.png" alt="ThS. Lê Minh Thư" class="expert-avatar">
+          <div class="expert-meta">
+            <h3>ThS. Lê Minh Thư</h3>
+            <span class="expert-status" id="status-expert_thu"><i class="fa-solid fa-circle"></i> Đang trực tuyến</span>
+          </div>
+        </div>
+        <p class="expert-bio">Chuyên gia tư vấn kỹ năng sống và kết nối học sinh - phụ huynh. Hỗ trợ giải tỏa lo âu học
+          đường và định hướng tâm lý tích cực.</p>
+        <div class="expert-focus">Tư vấn cho phụ huynh và học sinh muốn cải thiện kết nối gia đình và xây dựng sự tự tin lâu dài.</div>
+        <div class="expert-tags">
+          <span class="expert-tag">Giải tỏa lo âu</span>
+          <span class="expert-tag">Kết nối gia đình</span>
+          <span class="expert-tag">Định hướng tích cực</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+          <button class="btn btn-primary btn-book-expert" data-expert-id="expert_thu"
+            data-expert-name="ThS. Lê Minh Thư" style="flex: 1; justify-content: center; padding: 0.65rem 0.5rem; font-size: 0.85rem;">
+            <i class="fa-solid fa-calendar-days"></i> Đặt Lịch
+          </button>
+          <button class="btn btn-secondary btn-chat-expert" data-expert-id="expert_thu"
+            data-expert-name="ThS. Lê Minh Thư" style="flex: 1; justify-content: center; padding: 0.65rem 0.5rem; font-size: 0.85rem; background: rgba(99, 102, 241, 0.1); color: var(--color-primary); border: 1px solid rgba(99, 102, 241, 0.2);">
+            <i class="fa-solid fa-comments"></i> Nhắn Tin
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Dashboard Segment -->
+    <div class="my-bookings-panel glass-panel">
+      <h3 id="my-bookings-title" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-bright);">
+        <i class="fa-solid fa-clock-rotate-left" style="color: var(--color-primary);"></i> Lịch hẹn tư vấn của tôi
+      </h3>
+      <p id="my-bookings-subtitle" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">
+        Xem trạng thái và thông tin phản hồi từ các cuộc hẹn với chuyên gia mà bạn đã đăng ký.
+      </p>
+      <div class="my-bookings-list" id="my-bookings-container">
+        <div style="text-align: center; color: var(--text-muted); font-size: 0.9rem; padding: 2rem 0;">
+          Vui lòng <span
+            style="color: var(--color-secondary); font-weight: 600; cursor: pointer; text-decoration: underline;"
+            id="btn-login-prompt-booking">Đăng nhập</span> để xem và đặt lịch hẹn tư vấn.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       AI CHATBOT SECTION
+       ========================================================================== -->
+  <section id="ai-chatbot-section">
+    <div class="section-header">
+      <span class="section-tag">Trợ lý ảo 24/7</span>
+      <h2 class="section-title">Trò Chuyện Với Trợ Lý AI</h2>
+      <p class="section-subtitle">SafeSpace AI lắng nghe và hỗ trợ tư vấn tâm lý sơ bộ, giải tỏa lo lắng, và hướng dẫn
+        bạn các bước xử lý ban đầu một cách an toàn và riêng tư.</p>
+    </div>
+
+    <div class="ai-chatbot-wrapper">
+      <div class="ai-chat-layout glass-panel">
+        <div class="ai-chat-topbar">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="ai-chat-bubble-avatar">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div>
+              <div class="chat-topbar-title">SafeSpace AI Counselor</div>
+              <div class="chat-topbar-sub"><i class="fa-solid fa-circle"
+                  style="color: #22c55e; font-size: 0.5rem; margin-right: 0.25rem;"></i> Trực tuyến 24/7</div>
+            </div>
+          </div>
+          <button class="btn btn-secondary" id="btn-clear-ai-chat" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;">
+            <i class="fa-solid fa-trash-can"></i> Xóa Chat
+          </button>
+        </div>
+
+        <!-- Messages Container -->
+        <div class="ai-chat-messages" id="ai-chat-messages-container">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Quick Reply Chips -->
+        <div class="ai-chat-quick-replies" id="ai-quick-replies">
+          <div class="quick-reply-chip" data-query="Tôi cảm thấy rất áp lực và mệt mỏi trong học tập">Lo âu học tập
+          </div>
+          <div class="quick-reply-chip" data-query="Có một bạn cùng lớp hay nhắn tin đe dọa, xúc phạm tôi">Bị bắt nạt
+            trên mạng</div>
+          <div class="quick-reply-chip" data-query="Tôi muốn biết bài tập thư giãn để bình tĩnh hơn">Bài tập thư giãn
+          </div>
+          <div class="quick-reply-chip" data-query="Tôi nên làm gì khi chứng kiến bạn mình bị tẩy chay?">Bạn bè bị tẩy
+            chay</div>
+        </div>
+
+        <!-- Form Input Area -->
+        <form class="chat-input-area" id="ai-chat-form">
+          <textarea class="chat-input" id="ai-chat-input-msg"
+            placeholder="Hãy chia sẻ suy nghĩ hoặc vấn đề của bạn tại đây..." rows="1" required></textarea>
+          <button type="submit" class="chat-send-btn" aria-label="Send message">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SOS FLOATING ACTION BUTTON & MODAL
+       ========================================================================== -->
+  <button class="sos-fab" id="sos-fab" title="Trợ giúp Khẩn cấp SOS — kéo để đổi vị trí" aria-label="Trợ giúp khẩn cấp SOS, có thể kéo để đổi vị trí">
+    SOS
+  </button>
+
+  <div class="modal-overlay" id="sos-modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" id="sos-modal-close" aria-label="Close modal">&times;</button>
+
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <div>
+          <h2>SOS - Hỗ Trợ Khẩn Cấp</h2>
+          <p>Đừng lo lắng, chúng tôi luôn ở đây để giúp bạn an toàn.</p>
+        </div>
+      </div>
+
+      <!-- Emergency Buttons -->
+      <div class="sos-hotlines">
+        <a href="tel:111" class="sos-hotline-btn"><i class="fa-solid fa-phone"></i> Gọi 111 (Trẻ em)</a>
+        <a href="tel:113" class="sos-hotline-btn"><i class="fa-solid fa-phone"></i> Gọi 113 (Công an)</a>
+      </div>
+
+      <div class="sos-divider">hoặc Gửi tín hiệu SOS đến trường</div>
+
+      <!-- SOS Form Area -->
+      <div id="sos-form-container">
+        <form id="sos-emergency-form">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label style="color: var(--text-main);">Loại khẩn cấp:</label>
+            <div class="sos-type-grid" id="sos-type-selector">
+              <button type="button" class="sos-type-btn" data-type="Đang bị bắt nạt thể xác">Bắt nạt thể xác</button>
+              <button type="button" class="sos-type-btn" data-type="Bị đe dọa / Tống tiền">Bị đe dọa/Tống tiền</button>
+              <button type="button" class="sos-type-btn" data-type="Khủng hoảng tâm lý nặng">Khủng hoảng tâm lý</button>
+              <button type="button" class="sos-type-btn" data-type="Loại nguy hiểm khác">Nguy hiểm khác</button>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label for="sos-location" style="color: var(--text-main);">Vị trí của bạn trong trường (lớp học, hành
+              lang...):</label>
+            <input type="text" id="sos-location" placeholder="Ví dụ: Lớp 10A2, Nhà B..." required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label for="sos-note" style="color: var(--text-main);">Chi tiết ngắn gọn (không bắt buộc):</label>
+            <textarea id="sos-note" placeholder="Mô tả nhanh chuyện đang xảy ra..."
+              style="min-height: 80px;"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary"
+            style="width: 100%; justify-content: center; background: linear-gradient(135deg, #e11d48, #be123c); box-shadow: 0 4px 20px rgba(225,29,72,0.25);">
+            <i class="fa-solid fa-circle-exclamation"></i> Gửi Tín Hiệu SOS
+          </button>
+        </form>
+      </div>
+
+      <!-- SOS Success Area -->
+      <div class="sos-success-msg" id="sos-success-view">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Tín hiệu SOS đã được gửi đi!</h3>
+        <p>Thông tin đã được báo cáo trực tiếp đến Ban Giám hiệu Nhà trường. Hãy cố gắng giữ bình tĩnh và ở nơi an toàn
+          hoặc tìm kiếm thầy cô giáo gần nhất.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>SafeSpace</span>
+        </a>
+        <p>Cung cấp sự tĩnh tâm, công cụ giáo dục và tài nguyên để xây dựng các cộng đồng thực tế và kỹ thuật số tử tế
+          hơn.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Khám phá</h4>
+        <ul>
+          <li><a href="#home">Trang chủ</a></li>
+          <li><a href="#scenarios">Cẩm nang Tình huống</a></li>
+          <li><a href="#toolbox">Góc Tĩnh tâm</a></li>
+          <li><a href="#education">Góc Giáo dục</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4>An toàn & Bảo mật</h4>
+        <ul>
+          <li><a href="#log-creator">Nhật ký Sự cố</a></li>
+          <li><a href="#resources">Đường dây nóng</a></li>
+          <li><a style="cursor: pointer;"
+              onclick="window.showNotice('SafeSpace không lưu bất kỳ thông tin cá nhân, cookie hay nhật ký nào của bạn. Các mục báo cáo sự cố được lưu hoàn toàn trên trình duyệt cục bộ và sẽ bị xóa ngay khi đóng tab hoặc tải lại trang.', 'info', 5000);">Chính
+              sách Bảo mật</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sáng kiến SafeSpace. Cùng nhau đứng vững.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Facebook link"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="social-link" aria-label="Twitter link"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#" class="social-link" aria-label="Instagram link"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOOKING FORM MODAL -->
+  <div class="modal-overlay" id="booking-modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" id="booking-modal-close" aria-label="Close modal">&times;</button>
+
+      <div class="modal-header">
+        <div class="modal-header-icon" style="background: rgba(13, 148, 136, 0.12); color: var(--color-primary);">
+          <i class="fa-solid fa-calendar-plus"></i>
+        </div>
+        <div>
+          <h2>Đặt Lịch Hẹn Chuyên Gia</h2>
+          <p id="booking-modal-expert-name" style="font-weight: 600; color: var(--color-primary);">Tên Chuyên Gia</p>
+        </div>
+      </div>
+
+      <form id="booking-form" onsubmit="return false;">
+        <input type="hidden" id="booking-expert-id">
+        <input type="hidden" id="booking-expert-name">
+
+        <div class="form-grid" style="margin-bottom: 1.25rem;">
+          <div class="form-group">
+            <label for="booking-date">Chọn Ngày Hẹn</label>
+            <input type="date" id="booking-date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="booking-time">Khung Giờ Hẹn</label>
+            <select id="booking-time" required>
+              <option value="" disabled selected>Chọn khung giờ...</option>
+              <option value="08:00 - 09:30">08:00 - 09:30 (Sáng)</option>
+              <option value="10:00 - 11:30">10:00 - 11:30 (Sáng)</option>
+              <option value="14:00 - 15:30">14:00 - 15:30 (Chiều)</option>
+              <option value="16:00 - 17:30">16:00 - 17:30 (Chiều)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="booking-note">Lý do/Vấn đề bạn đang gặp phải (Không bắt buộc)</label>
+          <textarea id="booking-note" placeholder="Mô tả ngắn gọn điều bạn muốn chia sẻ với chuyên gia tư vấn..."
+            style="min-height: 90px;"></textarea>
+        </div>
+
+        <div class="booking-modal-tip">
+          <i class="fa-solid fa-shield-heart"></i>
+          <span>Thông tin bạn cung cấp sẽ được lưu riêng và chỉ dùng để hỗ trợ lịch hẹn tư vấn.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-check"></i> Xác Nhận Đăng Ký Đặt Lịch
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL (LOGIN/REGISTER) -->
+  <div class="modal-overlay" id="auth-modal-overlay">
+    <div class="modal-box" style="max-width: 420px;">
+      <button class="modal-close" id="auth-modal-close" aria-label="Close modal">&times;</button>
+
+      <div class="modal-header" style="margin-bottom: 1.5rem;">
+        <div class="modal-header-icon" style="background: rgba(99, 102, 241, 0.12); color: var(--color-secondary);">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <div>
+          <h2 id="auth-modal-title">Đăng Nhập SafeSpace</h2>
+          <p id="auth-modal-subtitle">Truy cập hệ thống đặt lịch & tư vấn AI</p>
+        </div>
+      </div>
+
+      <div class="auth-form-container">
+        <form id="auth-form" onsubmit="return false;">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="auth-email">Tài khoản (Email hoặc Tên Chuyên Gia)</label>
+            <input type="text" id="auth-email" placeholder="Email hoặc Tên chuyên gia (Ví dụ: ThS. Nguyễn Thị Mai)" required>
+          </div>
+
+          <div class="form-group" id="auth-name-group" style="margin-bottom: 1rem; display: none;">
+            <label for="auth-name">Tên của bạn</label>
+            <input type="text" id="auth-name" placeholder="Ví dụ: Nguyễn Văn A">
+          </div>
+
+          <div class="form-group" id="auth-role-group" style="margin-bottom: 1rem; display: none;">
+            <label for="auth-role">Vai trò</label>
+            <select id="auth-role">
+              <option value="user">Người dùng</option>
+              <option value="psychologist">Bác sĩ tâm lý</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="auth-role-help" style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+            <i class="fa-solid fa-stethoscope" style="color: var(--color-primary); margin-right: 0.35rem;"></i>
+            <span>Để tạo tài khoản bác sĩ tâm lý, hãy chuyển sang Đăng ký và chọn vai trò Bác sĩ tâm lý.</span>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label for="auth-password">Mật khẩu</label>
+            <input type="password" id="auth-password" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btn-auth-submit"
+            style="width: 100%; justify-content: center;">
+            Đăng Nhập
+          </button>
+        </form>
+
+        <p class="auth-toggle-link" id="auth-toggle-msg">
+          Chưa có tài khoản? <span id="auth-toggle-action">Đăng ký ngay</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-notice-stack" id="app-notice-stack" aria-live="polite"></div>
+
+  <div class="app-confirm-overlay" id="app-confirm-overlay">
+    <div class="app-confirm-card">
+      <h3 id="app-confirm-title">Xác nhận</h3>
+      <p id="app-confirm-message"></p>
+      <div class="app-confirm-actions">
+        <button type="button" class="app-confirm-btn app-confirm-cancel" id="app-confirm-cancel">Hủy</button>
+        <button type="button" class="app-confirm-btn app-confirm-ok" id="app-confirm-ok">Đồng ý</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-confirm-overlay" id="app-prompt-overlay">
+    <div class="app-confirm-card app-prompt-card">
+      <h3 id="app-prompt-title">Nhập thông tin</h3>
+      <p id="app-prompt-message"></p>
+      <input type="text" id="app-prompt-input" class="app-prompt-input" />
+      <div class="app-confirm-actions">
+        <button type="button" class="app-confirm-btn app-confirm-cancel" id="app-prompt-cancel">Hủy</button>
+        <button type="button" class="app-confirm-btn app-confirm-ok" id="app-prompt-submit">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PSYCHOLOGIST CHAT DRAWER -->
+  <div class="psy-chat-drawer" id="psy-chat-drawer">
+    <div class="psy-chat-header">
+      <div class="psy-chat-header-info">
+        <div class="psy-chat-avatar-container" id="psy-chat-avatar-container">
+          <!-- Avatar dynamic -->
+        </div>
+        <div>
+          <h4 id="psy-chat-doctor-name">Bác sĩ tâm lý</h4>
+          <span class="psy-chat-status"><i class="fa-solid fa-circle"></i> Đang trực tuyến</span>
+        </div>
+      </div>
+      <button class="psy-chat-close" id="psy-chat-close-btn" aria-label="Close chat">&times;</button>
+    </div>
+    
+    <div class="psy-chat-messages" id="psy-chat-messages-container">
+      <!-- Populated by JavaScript -->
+    </div>
+    
+    <form class="psy-chat-input-area" id="psy-chat-form">
+      <textarea class="psy-chat-input" id="psy-chat-input-msg" placeholder="Nhập tin nhắn..." rows="1" required></textarea>
+      <button type="submit" class="psy-chat-send-btn" aria-label="Send message">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
+
+  <!-- Custom JavaScript Logic -->
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>
